@@ -41,6 +41,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToOne(inversedBy: 'tenants')]
     private ?Property $property = null;
 
+    #[ORM\ManyToOne]
+    private ?Property $currentProperty = null;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
@@ -154,6 +157,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setProperty(?Property $property): self
     {
         $this->property = $property;
+
+        return $this;
+    }
+
+    public function getCurrentProperty(): ?Property
+    {
+        return $this->currentProperty;
+    }
+
+    public function setCurrentProperty(?Property $currentProperty): self
+    {
+        $this->currentProperty = $currentProperty;
 
         return $this;
     }
