@@ -1,4 +1,63 @@
 @import "~bootstrap/scss/bootstrap";
 body {
-    background-color: lightgray;
+    background-color: #0A1628;
+    color: white;
+}
+.navbar-wrapp
+{
+    box-shadow: rgb(134 85 255 / 20%) 0px 0px 50px;
+    background-color: #0A1628;
+    color: white;
+    border-radius: 18px;
+    padding-left: 10px;
+
+    a
+    {
+        color: white;
+    }
+    a:hover
+    {
+        color: #8655FF;
+    }
+}
+.login-wrapp
+{
+    margin-top: 20vh;
+}
+.login-form-wrapp
+{
+    box-shadow: rgb(134 85 255 / 20%) 0px 0px 50px;
+    border-radius: 18px;
+    padding: 20px 10px;
+}
+label
+{
+    color: #8655FF;
+}
+.btn-primary
+{
+    background-color: #8655FF;
+    border-color: #8655FF;
+}
+.btn-primary:hover
+{
+    background-color: #653cd9;
+    border-color: #8655FF;
+}
+.login-register
+{
+    color: #8655FF;
+}
+.login-register:hover
+{
+    color: #653cd9;
+}
+.login-error
+{
+    color: darkred;
+}
+.form-check-input:checked
+{
+    background-color: #8655FF;
+    border-color: #8655FF;
 }
