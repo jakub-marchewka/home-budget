@@ -1,5 +1,15 @@
 {% extends 'panel.html.twig' %}
 
 {% block content %}
-
+    <div class="row mt-5 justify-content-between">
+        <div class="col-sm-12 col-md-4">
+            <button class="btn btn-primary">Dodaj nieruchomość +</button>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <a class="btn btn-primary" href="#">Zaproszenia</a>
+        </div>
+    </div>
+    <div class="property-table-wrapp">
+        {% include 'property/propertyTable.html.twig' %}
+    </div>
 {% endblock %}

@@ -4,14 +4,14 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav">
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ path('app_home') }}">Home</a>
+            <li class="nav-item">
+                <a class="nav-link {% if 'app_home' in app.request.get('_route') %} nav-link-active {% endif %}" href="{{ path('app_home') }}">Home</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_property_index') }}">Nieruchomości</a>
+                <a class="nav-link {% if 'app_property' in app.request.get('_route') %} nav-link-active {% endif %}" href="{{ path('app_property_index') }}">Nieruchomości</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{{ path('app_bill_index') }}">Rachunki</a>
+                <a class="nav-link {% if 'app_bill' in app.request.get('_route') %} nav-link-active {% endif %}" href="{{ path('app_bill_index') }}">Rachunki</a>
             </li>
         </ul>
     </div>

@@ -35,6 +35,12 @@
             "migrations/.gitignore"
         ]
     },
+    "php-flasher/flasher-symfony": {
+        "version": "v1.10.4"
+    },
+    "php-flasher/flasher-toastr-symfony": {
+        "version": "v1.10.4"
+    },
     "phpunit/phpunit": {
         "version": "9.5",
         "recipe": {

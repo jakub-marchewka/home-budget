@@ -1,0 +1,29 @@
+<div class="row mt-5">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Właściciel</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if properties is empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Dodaj nieruchomość lub przyjmij zaproszenie</td>
+                </tr>
+            {% endif %}
+            {% for property in properties %}
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Mark</td>
+                    <td>Otto</td>
+                    <td>@mdo</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
