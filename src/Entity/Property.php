@@ -25,16 +25,16 @@ class Property
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
-    #[ORM\OneToMany(mappedBy: 'property', targetEntity: User::class)]
-    private Collection $tenants;
-
     #[ORM\OneToMany(mappedBy: 'property', targetEntity: Bill::class)]
     private Collection $bills;
 
+    #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'rentedProperties')]
+    private Collection $tenants;
+
     public function __construct()
     {
-        $this->tenants = new ArrayCollection();
         $this->bills = new ArrayCollection();
+        $this->tenants = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -67,36 +67,6 @@ class Property
     }
 
     /**
-     * @return Collection<int, User>
-     */
-    public function getTenants(): Collection
-    {
-        return $this->tenants;
-    }
-
-    public function addTenant(User $tenant): self
-    {
-        if (!$this->tenants->contains($tenant)) {
-            $this->tenants->add($tenant);
-            $tenant->setProperty($this);
-        }
-
-        return $this;
-    }
-
-    public function removeTenant(User $tenant): self
-    {
-        if ($this->tenants->removeElement($tenant)) {
-            // set the owning side to null (unless already changed)
-            if ($tenant->getProperty() === $this) {
-                $tenant->setProperty(null);
-            }
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection<int, Bill>
      */
     public function getBills(): Collection
@@ -122,6 +92,30 @@ class Property
                 $bill->setProperty(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getTenants(): Collection
+    {
+        return $this->tenants;
+    }
+
+    public function addTenant(User $tenant): self
+    {
+        if (!$this->tenants->contains($tenant)) {
+            $this->tenants->add($tenant);
+        }
+
+        return $this;
+    }
+
+    public function removeTenant(User $tenant): self
+    {
+        $this->tenants->removeElement($tenant);
 
         return $this;
     }

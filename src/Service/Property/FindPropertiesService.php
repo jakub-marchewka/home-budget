@@ -5,16 +5,14 @@ declare(strict_types=1);
 namespace App\Service\Property;
 
 use App\Entity\User;
-use App\Repository\PropertyRepository;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class FindPropertiesService
 {
-    public function __construct(private PropertyRepository $repository)
+    public function find(User $user): ArrayCollection
     {
-    }
-
-    public function find(User $user)
-    {
-        
+        $propertiesOwned = $user->getProperties();
+        $propertiesRented = $user->getRentedProperties();
+        return new ArrayCollection(array_merge($propertiesOwned->toArray(), $propertiesRented->toArray()));
     }
 }

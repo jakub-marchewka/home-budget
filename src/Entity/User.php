@@ -38,15 +38,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Property::class)]
     private Collection $properties;
 
-    #[ORM\ManyToOne(inversedBy: 'tenants')]
-    private ?Property $property = null;
-
     #[ORM\ManyToOne]
     private ?Property $currentProperty = null;
+
+    #[ORM\ManyToMany(targetEntity: Property::class, mappedBy: 'tenants')]
+    private Collection $rentedProperties;
 
     public function __construct()
     {
         $this->properties = new ArrayCollection();
+        $this->rentedProperties = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -149,18 +150,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getProperty(): ?Property
-    {
-        return $this->property;
-    }
-
-    public function setProperty(?Property $property): self
-    {
-        $this->property = $property;
-
-        return $this;
-    }
-
     public function getCurrentProperty(): ?Property
     {
         return $this->currentProperty;
@@ -169,6 +158,33 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setCurrentProperty(?Property $currentProperty): self
     {
         $this->currentProperty = $currentProperty;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Property>
+     */
+    public function getRentedProperties(): Collection
+    {
+        return $this->rentedProperties;
+    }
+
+    public function addRentedProperty(Property $rentedProperty): self
+    {
+        if (!$this->rentedProperties->contains($rentedProperty)) {
+            $this->rentedProperties->add($rentedProperty);
+            $rentedProperty->addTenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRentedProperty(Property $rentedProperty): self
+    {
+        if ($this->rentedProperties->removeElement($rentedProperty)) {
+            $rentedProperty->removeTenant($this);
+        }
 
         return $this;
     }
