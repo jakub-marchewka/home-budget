@@ -21,7 +21,13 @@
                     <th scope="row">{{ i }}</th>
                     <td>{{ property.name }}</td>
                     <td>{{ property.owner.email }}</td>
-                    <td></td>
+                    <td>
+                        {% if app.user.currentProperty == property %}
+                            <i class="fa-solid fa-star currentPropertyIcon changeCurrentPropertyButton" propertyId="{{ property.id }}"></i>
+                        {% else %}
+                            <i class="fa-regular fa-star changeCurrentPropertyButton" propertyId="{{ property.id }}"></i>
+                        {% endif %}
+                    </td>
                 </tr>
                 {% set i = i + 1 %}
             {% endfor %}

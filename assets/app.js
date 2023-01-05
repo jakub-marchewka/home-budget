@@ -15,8 +15,10 @@ import flasher from "@flasher/flasher";
 window.flasher = flasher;
 
 import {Property} from "./js/property";
+import {Bill} from "./js/bill";
 
 $(document).ready(function() {
     $('[data-toggle="popover"]').popover();
     const property = new Property();
+    const bill = new Bill();
 });

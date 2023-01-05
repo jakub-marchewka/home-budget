@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use App\Repository\BillRepository;
+use DateTimeImmutable;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid\Uuid;
@@ -20,7 +23,7 @@ class Bill
     private ?string $name = null;
 
     #[ORM\Column]
-    private ?\DateTimeImmutable $createdAt = null;
+    private ?DateTimeImmutable $createdAt = null;
 
     #[ORM\ManyToOne(inversedBy: 'bills')]
     #[ORM\JoinColumn(nullable: false)]
@@ -30,7 +33,22 @@ class Bill
     private ?int $priceTotal = null;
 
     #[ORM\Column]
-    private ?bool $paid = null;
+    private ?int $splitOn = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $type = null;
+
+    #[ORM\ManyToMany(targetEntity: User::class)]
+    private Collection $paidBy;
+
+    #[ORM\Column]
+    private ?bool $archived = false;
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTimeImmutable();
+        $this->paidBy = new ArrayCollection();
+    }
 
     public function getId(): ?Uuid
     {
@@ -49,12 +67,12 @@ class Bill
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    public function setCreatedAt(DateTimeImmutable $createdAt): self
     {
         $this->createdAt = $createdAt;
 
@@ -85,14 +103,62 @@ class Bill
         return $this;
     }
 
-    public function isPaid(): ?bool
+    public function getSplitOn(): ?int
     {
-        return $this->paid;
+        return $this->splitOn;
     }
 
-    public function setPaid(bool $paid): self
+    public function setSplitOn(int $splitOn): self
     {
-        $this->paid = $paid;
+        $this->splitOn = $splitOn;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, User>
+     */
+    public function getPaidBy(): Collection
+    {
+        return $this->paidBy;
+    }
+
+    public function addPaidBy(User $paidBy): self
+    {
+        if (!$this->paidBy->contains($paidBy)) {
+            $this->paidBy->add($paidBy);
+        }
+
+        return $this;
+    }
+
+    public function removePaidBy(User $paidBy): self
+    {
+        $this->paidBy->removeElement($paidBy);
+
+        return $this;
+    }
+
+    public function isArchived(): ?bool
+    {
+        return $this->archived;
+    }
+
+    public function setArchived(bool $archived): self
+    {
+        $this->archived = $archived;
 
         return $this;
     }
