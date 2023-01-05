@@ -1,0 +1,60 @@
+{% extends 'panel.html.twig' %}
+
+{% block content %}
+    <div class="row mt-5 justify-content-between">
+        <div class="col-sm-12 col-md-4">
+            <a class="btn btn-primary" href="{{ path('app_bill_index') }}">Wróć</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Kwota całkowita</th>
+                    <th scope="col">Data</th>
+                    {% if app.user == app.user.currentProperty.owner %} <th scope="col"></th> {% endif %}
+                </tr>
+                </thead>
+                <tbody>
+                {% if bills is empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">Brak rachunków</td>
+                    </tr>
+                {% endif %}
+                {% set i = 0 %}
+                {% for bill in bills %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        <td>{{ bill.name }}</td>
+                        <td>{{ bill.pricetotal }}</td>
+                        <td>{{ bill.createdAt | date("m/d/Y") }}</td>
+                        {% if app.user == app.user.currentProperty.owner %}
+                            <th scope="col">
+                                 <i class="fa-regular fa-pen-to-square updateBillModal" billId="{{ bill.id }}"></i>
+                            </th>
+                        {% endif %}
+                    </tr>
+                    {% set i = i + 1 %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Rachunki</h5>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary addBillModalCloseButton" data-dismiss="modal">Zamknij</button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

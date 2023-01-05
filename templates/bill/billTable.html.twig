@@ -7,6 +7,7 @@
                 <th scope="col">Nazwa</th>
                 <th scope="col">Kwota całkowita</th>
                 <th scope="col">Kwota do zapłaty</th>
+                <th scope="col">Data</th>
                 <th scope="col"></th>
             </tr>
             </thead>
@@ -23,6 +24,7 @@
                     <td>{{ bill.name }}</td>
                     <td>{{ bill.pricetotal }}</td>
                     <td>{{ (bill.pricetotal/bill.splitOn) | round(2) }}</td>
+                    <td>{{ bill.createdAt | date("m/d/Y") }}</td>
                     <td>
                         {% if app.user == app.user.currentProperty.owner %}
                             <i class="fa-regular fa-pen-to-square updateBillModal" billId="{{ bill.id }}"></i>

@@ -6,7 +6,6 @@ namespace App\Controller\Bill;
 
 use App\Entity\Bill;
 use App\Form\BillType;
-use App\Repository\BillRepository;
 use App\Service\Bill\GetBillsService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -39,7 +38,7 @@ class BillIndexController extends AbstractController
         }
         return $this->render('bill/bill.html.twig', [
             'form' => $form,
-            'bills' => $billsService->find($this->getUser()->getCurrentProperty()),
+            'bills' => $billsService->find($this->getUser()->getCurrentProperty(), false),
         ]);
     }
 }

@@ -13,8 +13,8 @@ class GetBillsService
     {
     }
 
-    public function find(Property $property): ?array
+    public function find(Property $property, bool $archived): ?array
     {
-        return $this->repository->findBy(['property' => $property, 'archived' => false]);
+        return $this->repository->findBy(['property' => $property, 'archived' => $archived]);
     }
 }
