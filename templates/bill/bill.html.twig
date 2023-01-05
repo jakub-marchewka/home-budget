@@ -11,17 +11,10 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Dodaj rachunek</h5>
+                        <h5 class="modal-title" id="exampleModalLabel">Rachunki</h5>
                     </div>
                     <div class="modal-body">
-                        {{ form_start(form) }}
-                        {{ form_row(form.name) }}
-                        {{ form_row(form.priceTotal) }}
-                        {{ form_row(form.splitOn) }}
-                        {{ form_row(form.type) }}
-                        {{ form_row(form.archived) }}
-                        <button type="button" class="btn btn-primary mt-3">Dodaj</button>
-                        {{ form_end(form) }}
+                        {% include 'bill/createForm.html.twig' %}
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-primary addBillModalCloseButton" data-dismiss="modal">Zamknij</button>
@@ -30,4 +23,7 @@
             </div>
         </div>
     {% endif %}
+    <div class="bill-table-wrap">
+        {% include 'bill/billTable.html.twig' %}
+    </div>
 {% endblock %}

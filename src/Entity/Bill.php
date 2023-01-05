@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use App\Enum\BillTypeEnum;
+use App\Form\BillType;
 use App\Repository\BillRepository;
 use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -36,7 +38,7 @@ class Bill
     private ?int $splitOn = null;
 
     #[ORM\Column(length: 255)]
-    private ?string $type = null;
+    private ?BillTypeEnum $type = null;
 
     #[ORM\ManyToMany(targetEntity: User::class)]
     private Collection $paidBy;
@@ -91,14 +93,14 @@ class Bill
         return $this;
     }
 
-    public function getPriceTotal(): ?int
+    public function getPriceTotal(): ?float
     {
-        return $this->priceTotal;
+        return $this->priceTotal / 100;
     }
 
-    public function setPriceTotal(int $priceTotal): self
+    public function setPriceTotal(float $priceTotal): self
     {
-        $this->priceTotal = $priceTotal;
+        $this->priceTotal = $priceTotal * 100;
 
         return $this;
     }
@@ -115,12 +117,12 @@ class Bill
         return $this;
     }
 
-    public function getType(): ?string
+    public function getType(): ?BillTypeEnum
     {
         return $this->type;
     }
 
-    public function setType(string $type): self
+    public function setType(BillTypeEnum $type): self
     {
         $this->type = $type;
 

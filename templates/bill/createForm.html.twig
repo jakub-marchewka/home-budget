@@ -1,0 +1,9 @@
+{{ form_start(form, {'attr': {'class': 'billForm'}}) }}
+    {{ form_row(form.name) }}
+    {{ form_row(form.priceTotal) }}
+    {{ form_row(form.splitOn) }}
+    {{ form_row(form.type) }}
+    {{ form_row(form.archived) }}
+    {{ form_row(form.paidBy) }}
+    <button type="submit" class="btn btn-primary mt-3 billCreateSubmitButton {% if type is defined and type == 'update' %} isUpdate {% endif %}">Dodaj</button>
+{{ form_end(form) }}
