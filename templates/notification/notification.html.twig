@@ -1,0 +1,29 @@
+{% extends 'panel.html.twig' %}
+
+{% block content %}
+    {% if app.user == app.user.currentProperty.owner %}
+        <div class="row mt-5 justify-content-between">
+            <div class="col-sm-12 col-md-4">
+                <button class="btn btn-primary addNotificationButton">Dodaj powiadomienie</button>
+            </div>
+        </div>
+        <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Rachunki</h5>
+                    </div>
+                    <div class="modal-body">
+                        {% include 'notification/notificationForm.html.twig' %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary addBillModalCloseButton" data-dismiss="modal">Zamknij</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+    <div class="bill-table-wrap">
+        {% include 'notification/notificationTable.html.twig' %}
+    </div>
+{% endblock %}
