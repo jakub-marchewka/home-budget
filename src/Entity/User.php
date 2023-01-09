@@ -44,10 +44,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\ManyToMany(targetEntity: Property::class, mappedBy: 'tenants')]
     private Collection $rentedProperties;
 
+    #[ORM\OneToMany(mappedBy: 'tenant', targetEntity: TenantInvite::class)]
+    private Collection $tenantInvites;
+
     public function __construct()
     {
         $this->properties = new ArrayCollection();
         $this->rentedProperties = new ArrayCollection();
+        $this->tenantInvites = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -184,6 +188,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         if ($this->rentedProperties->removeElement($rentedProperty)) {
             $rentedProperty->removeTenant($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TenantInvite>
+     */
+    public function getTenantInvites(): Collection
+    {
+        return $this->tenantInvites;
+    }
+
+    public function addTenantInvite(TenantInvite $tenantInvite): self
+    {
+        if (!$this->tenantInvites->contains($tenantInvite)) {
+            $this->tenantInvites->add($tenantInvite);
+            $tenantInvite->setTenant($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTenantInvite(TenantInvite $tenantInvite): self
+    {
+        if ($this->tenantInvites->removeElement($tenantInvite)) {
+            // set the owning side to null (unless already changed)
+            if ($tenantInvite->getTenant() === $this) {
+                $tenantInvite->setTenant(null);
+            }
         }
 
         return $this;

@@ -31,10 +31,14 @@ class Property
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'rentedProperties')]
     private Collection $tenants;
 
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: TenantInvite::class)]
+    private Collection $tenantInvites;
+
     public function __construct()
     {
         $this->bills = new ArrayCollection();
         $this->tenants = new ArrayCollection();
+        $this->tenantInvites = new ArrayCollection();
     }
 
     public function getId(): ?Uuid
@@ -116,6 +120,36 @@ class Property
     public function removeTenant(User $tenant): self
     {
         $this->tenants->removeElement($tenant);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, TenantInvite>
+     */
+    public function getTenantInvites(): Collection
+    {
+        return $this->tenantInvites;
+    }
+
+    public function addTenantInvite(TenantInvite $tenantInvite): self
+    {
+        if (!$this->tenantInvites->contains($tenantInvite)) {
+            $this->tenantInvites->add($tenantInvite);
+            $tenantInvite->setProperty($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTenantInvite(TenantInvite $tenantInvite): self
+    {
+        if ($this->tenantInvites->removeElement($tenantInvite)) {
+            // set the owning side to null (unless already changed)
+            if ($tenantInvite->getProperty() === $this) {
+                $tenantInvite->setProperty(null);
+            }
+        }
 
         return $this;
     }

@@ -1,0 +1,17 @@
+{% extends 'panel.html.twig' %}
+
+{% block content %}
+    <div class="row mt-5 justify-content-between">
+        <div class="col-sm-12 col-md-4">
+            <a class="btn btn-primary" href="{{ path('app_property_index') }}">Wróć</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-sm-12 col-md-4">
+            {{ form_start(form) }}
+            {{ form_row(form.tenant) }}
+            <button type="submit" class="btn btn-primary mt-3 billCreateSubmitButton {% if type is defined and type == 'update' %} isUpdate {% endif %}">Dodaj</button>
+            {{ form_end(form) }}
+        </div>
+    </div>
+{% endblock %}

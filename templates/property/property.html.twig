@@ -6,7 +6,16 @@
             <button class="btn btn-primary addPropertyModalButton">Dodaj nieruchomość +</button>
         </div>
         <div class="col-sm-12 col-md-4">
-            <a class="btn btn-primary" href="#">Zaproszenia</a>
+            <a class="btn btn-primary"
+               href="
+                {% if app.user.currentProperty.owner == app.user %}
+                    {{ path('app_property_tenant_owner')}}
+                {% else %}
+                    {{ path('app_property_tenant')}}
+                {% endif %}"
+            >
+                Zaproszenia
+            </a>
         </div>
     </div>
     <div class="property-table-wrapp">
