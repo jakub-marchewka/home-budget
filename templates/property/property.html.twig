@@ -8,7 +8,7 @@
         <div class="col-sm-12 col-md-4">
             <a class="btn btn-primary"
                href="
-                {% if app.user.currentProperty.owner == app.user %}
+                {% if app.user.currentProperty and app.user.currentProperty.owner == app.user %}
                     {{ path('app_property_tenant_owner')}}
                 {% else %}
                     {{ path('app_property_tenant')}}

@@ -1,0 +1,42 @@
+{% extends 'panel.html.twig' %}
+
+{% block content %}
+    <div class="row mt-5 justify-content-between">
+        <div class="col-sm-12 col-md-4">
+            <a class="btn btn-primary" href="{{ path('app_property_index') }}">Wróć</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col"></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% if invites is empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">Brak zaproszeń</td>
+                    </tr>
+                {% endif %}
+                {% set i = 0 %}
+                {% for invite in invites %}
+                    <tr>
+                        <th scope="row">{{ i }}</th>
+                        <td>{{ invite.property.name }}</td>
+                        <td>
+                            <a href="{{ path('app_property_invite_accept', { 'tenantInvite' : invite.id }) }}" class="text-white">
+                                <i class="fa-regular fa-circle-check"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% set i = i + 1 %}
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

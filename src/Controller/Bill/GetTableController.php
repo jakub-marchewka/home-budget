@@ -14,7 +14,7 @@ class GetTableController extends AbstractController
     #[Route('/portal/bill/table', name: 'app_bill_table')]
     public function __invoke(GetBillsService $billsService): Response
     {
-        $bills = $billsService->find($this->getUser()->getCurrentProperty());
+        $bills = $billsService->find($this->getUser()->getCurrentProperty(), false);
         return $this->render('bill/billTable.html.twig', [
             'bills' => $bills,
         ]);

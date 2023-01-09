@@ -20,5 +20,5 @@ class SendInviteService
         $this->tenantInviteRepository->save($tenantInvite, true);
         return $tenantInvite;
     }
-    
+
 }
