@@ -14,6 +14,7 @@ jobs:
         host: ${{ secrets.IP }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.PRIVATE_KEY }}
+        passphrase: ${{ secrets.SSH_PASSPHRASE }}
         port: ${{ secrets.PORT }}
         script: |
           echo "test"
