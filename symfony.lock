@@ -67,6 +67,12 @@
             "config/packages/sensio_framework_extra.yaml"
         ]
     },
+    "symfony/apache-pack": {
+        "version": "1.0",
+        "recipe": {
+            "version": "1.0"
+        }
+    },
     "symfony/console": {
         "version": "6.2",
         "recipe": {
