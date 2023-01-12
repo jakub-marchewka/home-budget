@@ -17,4 +17,9 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         port: ${{ secrets.PORT }}
         script: |
-          echo "test"
+          cd /home/jsmarchewka/domains/jsmarchewka.pl/public_html/home/home-budget
+          git pull
+          php81 ~/composer-stable.phar install
+          php81 bin/console doctrine:migration:migrate --no-interaction
+          source /home/jsmarchewka/nodevenv/domains/jsmarchewka.pl/public_html/home/home-budget/16/bin/activate && cd /home/jsmarchewka/domains/jsmarchewka.pl/public_html/home/home-budget
+          npm run build
