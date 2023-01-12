@@ -18,6 +18,7 @@ jobs:
         port: ${{ secrets.PORT }}
         script: |
           cd /home/jsmarchewka/domains/jsmarchewka.pl/public_html/home/home-budget
+          ssh-add ~/.ssh/id_ed25519
           git pull
           php81 ~/composer-stable.phar install
           php81 bin/console doctrine:migration:migrate --no-interaction
