@@ -7,7 +7,7 @@
                 <button class="btn btn-primary addNotificationButton">Dodaj powiadomienie</button>
             </div>
         </div>
-        <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="notificationModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -17,13 +17,13 @@
                         {% include 'notification/notificationForm.html.twig' %}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary addBillModalCloseButton" data-dismiss="modal">Zamknij</button>
+                        <button type="button" class="btn btn-primary addNotificationModalCloseButton" data-dismiss="modal">Zamknij</button>
                     </div>
                 </div>
             </div>
         </div>
     {% endif %}
-    <div class="bill-table-wrap">
+    <div class="notification-table-wrap">
         {% include 'notification/notificationTable.html.twig' %}
     </div>
 {% endblock %}
