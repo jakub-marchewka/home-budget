@@ -4,6 +4,7 @@ export class Bill
     {
         Bill.createBill();
         Bill.billUpdate();
+        Bill.billDelete();
     }
     static createBill()
     {
@@ -56,6 +57,7 @@ export class Bill
                     $('.bill-table-wrap').html(response);
                     table.fadeIn();
                     Bill.billUpdate();
+                    Bill.billDelete();
                 });
             },
             error: () => {
@@ -87,5 +89,26 @@ export class Bill
     static clearForm()
     {
 
+    }
+
+    static billDelete()
+    {
+        $('.deleteBillButton').click(function () {
+            const billId = $(this).attr('billId');
+            $.ajax({
+                method: "POST",
+                url: "/portal/bill/delete/"+billId,
+                success: (response) => {
+                    if (response.status === 'success') {
+                        Bill.refreshTable();
+                    } else {
+                        flasher.error('Wystąpił błąd.');
+                    }
+                },
+                error: () => {
+                    flasher.error('Wystąpił błąd.');
+                }
+            })
+        })
     }
 }

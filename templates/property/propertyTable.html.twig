@@ -27,6 +27,9 @@
                         {% else %}
                             <i class="fa-regular fa-star changeCurrentPropertyButton" propertyId="{{ property.id }}"></i>
                         {% endif %}
+                        {% if app.user == property.owner %}
+                            <i class="fa-solid fa-trash deletePropertyButton" propertyId="{{ property.id }}"></i>
+                        {% endif %}
                     </td>
                 </tr>
                 {% set i = i + 1 %}

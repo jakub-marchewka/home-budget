@@ -39,6 +39,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $properties;
 
     #[ORM\ManyToOne]
+    #[ORM\JoinColumn(nullable: true, onDelete: 'SET NULL')]
     private ?Property $currentProperty = null;
 
     #[ORM\ManyToMany(targetEntity: Property::class, mappedBy: 'tenants')]
