@@ -27,6 +27,10 @@
                         {% else %}
                             <i class="fa-regular fa-star changeCurrentPropertyButton" propertyId="{{ property.id }}"></i>
                         {% endif %}
+                        {% if app.user == property.owner %}
+                            <i class="fa-solid fa-trash deletePropertyButton" propertyId="{{ property.id }}"></i>
+                            <a href="{{ path('app_property_chart', {'property': property.id}) }}" class="ms-1 text-white"><i class="fa-solid fa-chart-pie"></i></a>
+                        {% endif %}
                     </td>
                 </tr>
                 {% set i = i + 1 %}

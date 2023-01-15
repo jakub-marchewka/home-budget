@@ -33,7 +33,7 @@ class BillCreateController extends AbstractController
         $view = $this->renderView('bill/createForm.html.twig', [
             'form' => $form->createView(),
         ]);
-        //TODO: add email notif
+
         return $this->json(['status' => 'error', 'form' => $view]);
     }
 }

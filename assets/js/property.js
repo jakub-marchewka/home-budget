@@ -4,6 +4,7 @@ export class Property
     {
         this.createProperty();
         Property.changeCurrentProperty();
+        Property.propertyDelete();
     }
 
     createProperty()
@@ -30,7 +31,7 @@ export class Property
                             flasher.success('Nieruchomość została dodana.');
                             $('#name').val('');
                             $('.addPropertyModalAddButton').removeAttr('disabled');
-                            let table = $('.property-table-wrapp');
+                            let table = $('.property-table-wrap');
                             table.fadeOut(function () {
                                 table.html(response.table);
                                 table.fadeIn();
@@ -85,5 +86,46 @@ export class Property
                 })
             }
         });
+    }
+
+    static refreshTable()
+    {
+        const table = $('.property-table-wrap');
+        $.ajax({
+            method: "GET",
+            url: "/portal/property/table",
+            success: (response) => {
+                table.fadeOut(function () {
+                    table.html(response);
+                    table.fadeIn();
+                    Property.changeCurrentProperty();
+                    Property.propertyDelete();
+                });
+            },
+            error: () => {
+                flasher.error('Wystąpił błąd.');
+            }
+        })
+    }
+
+    static propertyDelete()
+    {
+        $('.deletePropertyButton').click(function () {
+            const propertyId = $(this).attr('propertyId');
+            $.ajax({
+                method: "POST",
+                url: "/portal/property/delete/"+propertyId,
+                success: (response) => {
+                    if (response.status === 'success') {
+                        Property.refreshTable();
+                    } else {
+                        flasher.error('Wystąpił błąd.');
+                    }
+                },
+                error: () => {
+                    flasher.error('Wystąpił błąd.');
+                }
+            })
+        })
     }
 }

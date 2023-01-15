@@ -26,6 +26,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@flasher/flasher": "^1.2.4"
+        "@flasher/flasher": "^1.2.4",
+        "chart.js": "^4.1.2"
     }
 }

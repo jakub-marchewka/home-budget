@@ -25,7 +25,7 @@ class Property
     #[ORM\JoinColumn(nullable: false)]
     private ?User $owner = null;
 
-    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Bill::class)]
+    #[ORM\OneToMany(mappedBy: 'property', targetEntity: Bill::class, orphanRemoval: true)]
     private Collection $bills;
 
     #[ORM\ManyToMany(targetEntity: User::class, inversedBy: 'rentedProperties')]

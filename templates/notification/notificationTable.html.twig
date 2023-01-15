@@ -1,0 +1,35 @@
+<div class="row mt-5">
+    <div class="col-12">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Nazwa</th>
+                <th scope="col">Dzień</th>
+                <th scope="col">Opis</th>
+                <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% if notifications is empty %}
+                <tr>
+                    <td colspan="4" class="text-center">Brak powiadomień</td>
+                </tr>
+            {% endif %}
+            {% set i = 0 %}
+            {% for notification in notifications %}
+                <tr>
+                    <th scope="row">{{ i }}</th>
+                    <td>{{ notification.name }}</td>
+                    <td>{{ notification.day }}</td>
+                    <td>{{ notification.description }}</td>
+                    <td>
+                        <i class="fa-solid fa-trash deleteNotificationButton" notificationId="{{ notification.id }}"></i>
+                    </td>
+                </tr>
+                {% set i = i + 1 %}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>

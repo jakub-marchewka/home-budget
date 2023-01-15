@@ -1,0 +1,14 @@
+{% extends 'panel.html.twig' %}
+
+{% block content %}
+    <div class="row mt-5 justify-content-between">
+        <div class="col-sm-12 col-md-4">
+            <a class="btn btn-primary" href="{{ path('app_property_index') }}">Wróć</a>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-12">
+            <canvas id="myChart" data-set='{{ data | raw }}'></canvas>
+        </div>
+    </div>
+{% endblock %}

@@ -42,7 +42,7 @@ class PropertyRepository extends ServiceEntityRepository
 //    /**
 //     * @return Property[] Returns an array of Property objects
 //     */
-//    public function findByExampleField($value): array
+//    public function groupBillsByTypeForProperty(): array
 //    {
 //        return $this->createQueryBuilder('p')
 //            ->andWhere('p.exampleField = :val')

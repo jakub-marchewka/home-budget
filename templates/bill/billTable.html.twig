@@ -27,7 +27,8 @@
                     <td>{{ bill.createdAt | date("m/d/Y") }}</td>
                     <td>
                         {% if app.user == app.user.currentProperty.owner %}
-                            <i class="fa-regular fa-pen-to-square updateBillModal" billId="{{ bill.id }}"></i>
+                            <i class="fa-regular fa-pen-to-square updateBillModal me-1" billId="{{ bill.id }}"></i>
+                            <i class="fa-solid fa-trash deleteBillButton" billId="{{ bill.id }}"></i>
                         {% else %}
                             {% if app.user in bill.paidBy %}
                                 <i class="fa-regular fa-thumbs-up"></i>
