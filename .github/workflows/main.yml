@@ -24,4 +24,5 @@ jobs:
           php81 ~/composer-stable.phar install
           php81 bin/console doctrine:migration:migrate --no-interaction
           source /home/jsmarchewka/nodevenv/domains/jsmarchewka.pl/public_html/home/home-budget/16/bin/activate && cd /home/jsmarchewka/domains/jsmarchewka.pl/public_html/home/home-budget
+          npm install
           npm run build
