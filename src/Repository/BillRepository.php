@@ -5,7 +5,9 @@ namespace App\Repository;
 use App\Entity\Bill;
 use App\Entity\Property;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\Form\FormInterface;
 
 /**
  * @extends ServiceEntityRepository<Bill>
@@ -53,6 +55,24 @@ class BillRepository extends ServiceEntityRepository
             ->getQuery()
             ->getArrayResult()
         ;
+    }
+
+    public function archiveSearch(Property $property, FormInterface $form): Query
+    {
+        $query = $this->createQueryBuilder('b');
+        $query
+            ->andWhere('b.archived = true')
+            ->andWhere('b.property = :property')
+            ->setParameter(':property', $property->getId()->toBinary());
+
+        if (null !== $name = $form->get('name')->getData()) {
+            $query
+                ->andWhere("b.name LIKE :val")
+                ->setParameter('val', '%' . $name . '%');
+        }
+        return $query
+            ->getQuery()
+            ;
     }
 
 //    public function findOneBySomeField($value): ?Bill

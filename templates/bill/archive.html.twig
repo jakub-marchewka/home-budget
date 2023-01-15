@@ -6,6 +6,28 @@
             <a class="btn btn-primary" href="{{ path('app_bill_index') }}">Wróć</a>
         </div>
     </div>
+    {{ form_start(form) }}
+    <div class="row mt-5">
+        <div class="col-4">
+            {{ form_row(form.name) }}
+        </div>
+        <div class="col-1">
+            {{ form_row(form.priceMin) }}
+        </div>
+        <div class="col-1">
+            {{ form_row(form.priceMax) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.dateFrom) }}
+        </div>
+        <div class="col-2">
+            {{ form_row(form.dateTo) }}
+        </div>
+        <div class="col-2 btnArchiveSearchCol">
+            <button type="submit" class="btn btn-primary mb-3">Szukaj</button>
+        </div>
+    </div>
+    {{ form_end(form) }}
     <div class="row mt-5">
         <div class="col-12">
             <table class="table">
@@ -19,13 +41,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                {% if bills is empty %}
+                {% if pagination is empty %}
                     <tr>
                         <td colspan="4" class="text-center">Brak rachunków</td>
                     </tr>
                 {% endif %}
                 {% set i = 0 %}
-                {% for bill in bills %}
+                {% for bill in pagination %}
                     <tr>
                         <th scope="row">{{ i }}</th>
                         <td>{{ bill.name }}</td>
@@ -41,6 +63,13 @@
                 {% endfor %}
                 </tbody>
             </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <div class="navigation">
+                {{ knp_pagination_render(pagination) }}
+            </div>
         </div>
     </div>
     <div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">

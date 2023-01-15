@@ -121,3 +121,9 @@ a.nav-link-active
     cursor: pointer;
     opacity: 0.7;
 }
+.btnArchiveSearchCol
+{
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+}
