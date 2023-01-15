@@ -70,6 +70,26 @@ class BillRepository extends ServiceEntityRepository
                 ->andWhere("b.name LIKE :val")
                 ->setParameter('val', '%' . $name . '%');
         }
+        if (null !== $priceMin = $form->get('priceMin')->getData()) {
+            $query
+                ->andWhere("b.priceTotal >= :priceMin")
+                ->setParameter('priceMin', $priceMin*100);
+        }
+        if (null !== $priceMax = $form->get('priceMax')->getData()) {
+            $query
+                ->andWhere("b.priceTotal <= :priceMax")
+                ->setParameter('priceMax', $priceMax*100);
+        }
+        if (null !== $dateFrom = $form->get('dateFrom')->getData()) {
+            $query
+                ->andWhere("b.createdAt >= :dateFrom")
+                ->setParameter('dateFrom', $dateFrom);
+        }
+        if (null !== $dateTo = $form->get('dateTo')->getData()) {
+            $query
+                ->andWhere("b.createdAt <= :dateTo")
+                ->setParameter('dateTo', $dateTo);
+        }
         return $query
             ->getQuery()
             ;

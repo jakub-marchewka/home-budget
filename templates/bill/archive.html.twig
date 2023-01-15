@@ -6,7 +6,7 @@
             <a class="btn btn-primary" href="{{ path('app_bill_index') }}">Wróć</a>
         </div>
     </div>
-    {{ form_start(form) }}
+    {{ form_start(form, {'attr': {'id': 'archiveForm'}}) }}
     <div class="row mt-5">
         <div class="col-4">
             {{ form_row(form.name) }}
@@ -23,8 +23,11 @@
         <div class="col-2">
             {{ form_row(form.dateTo) }}
         </div>
-        <div class="col-2 btnArchiveSearchCol">
+        <div class="col-auto btnArchiveSearchCol">
             <button type="submit" class="btn btn-primary mb-3">Szukaj</button>
+        </div>
+        <div class="col-auto btnArchiveSearchCol">
+            <button type="reset" class="btn btn-primary mb-3 archiveResetButton">Wyczyść</button>
         </div>
     </div>
     {{ form_end(form) }}

@@ -31,11 +31,13 @@ class ArchiveSearchType extends AbstractType
                 'label' => 'Data od',
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
+                'required' => false
             ])
             ->add('dateTo', DateType::class, [
                 'label' => 'Data do',
                 'widget' => 'single_text',
                 'input' => 'datetime_immutable',
+                'required' => false,
             ])
         ;
     }

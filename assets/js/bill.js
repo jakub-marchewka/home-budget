@@ -5,6 +5,7 @@ export class Bill
         Bill.createBill();
         Bill.billUpdate();
         Bill.billDelete();
+        Bill.archiveResetButton();
     }
     static createBill()
     {
@@ -109,6 +110,15 @@ export class Bill
                     flasher.error('Wystąpił błąd.');
                 }
             })
+        })
+    }
+    static archiveResetButton()
+    {
+        $('.archiveResetButton').click(function () {
+            $("form#archiveForm :input").each(function(){
+                const input = $(this);
+                input.removeAttr('value');
+            });
         })
     }
 }
