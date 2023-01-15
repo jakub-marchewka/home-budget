@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Bill;
+use App\Entity\Property;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -39,20 +40,20 @@ class BillRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Bill[] Returns an array of Bill objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('b')
-//            ->andWhere('b.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('b.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+    /**
+     * @return Bill[] Returns an array of Bill objects
+     */
+    public function groupBillsByTypeForProperty(Property $property): array
+    {
+        return $this->createQueryBuilder('b')
+            ->select('SUM(b.priceTotal) as sum, b.type')
+            ->groupBy('b.type')
+            ->andWhere('b.property = :property')
+            ->setParameter('property', $property->getId()->toBinary())
+            ->getQuery()
+            ->getArrayResult()
+        ;
+    }
 
 //    public function findOneBySomeField($value): ?Bill
 //    {
